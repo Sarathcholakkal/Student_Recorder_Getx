@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:student_recorder_getx/controller/screenview_controller.dart';
+import 'package:student_recorder_getx/controller/student_controller.dart';
 import 'package:student_recorder_getx/controller/theme_controller.dart';
 import 'package:student_recorder_getx/screens/home_screen/widgets/gridview_widget.dart';
 import 'package:student_recorder_getx/screens/home_screen/widgets/listview_widget.dart';
@@ -16,8 +17,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final ThemeController _themeController = Get.put(ThemeController());
-  final ScreenviewController _viewcontroller = Get.put(ScreenviewController());
+  final ThemeController _themeController = Get.find<ThemeController>();
+  final ScreenviewController _viewcontroller = Get.find<ScreenviewController>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

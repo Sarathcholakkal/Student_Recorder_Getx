@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 // ignore: depend_on_referenced_packages
 import 'package:image_picker/image_picker.dart';
+import 'package:student_recorder_getx/controller/student_controller.dart';
 import 'package:student_recorder_getx/model/student.dart';
 import 'package:student_recorder_getx/screens/form_screen/textfield_title_widget.dart';
 import 'package:student_recorder_getx/screens/form_screen/wide_textbutton.dart';
@@ -19,6 +22,7 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
+  final _studentController = Get.find<StudentController>();
   final _nameContorller = TextEditingController();
   final _emalilController = TextEditingController();
   final _subjectController = TextEditingController();
@@ -73,16 +77,11 @@ class _FormScreenState extends State<FormScreen> {
         cgpa: cgpa,
         phoneNumber: number,
       );
-      // await addStudent(student);
-      print('student object');
 
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (ctx) {
-            return const StudentProfile();
-          },
-        ),
-      );
+      await _studentController.addStudent(student);
+
+      print('student object');
+      Get.back();
       clearField();
       // getAllStudent();
     } else {

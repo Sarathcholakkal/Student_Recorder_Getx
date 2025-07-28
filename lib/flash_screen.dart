@@ -35,10 +35,3 @@ class _Flash_ScreenState extends State<Flash_Screen> {
     Get.offNamed('/homeScreen');
   }
 }
-
-//get  navidation 
-// get statmanagment 
-//dependceis injection
-// keyvalue storege instead shared pref
-// chnage theme
-//validator

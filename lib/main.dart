@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:student_recorder_getx/controller/screenview_controller.dart';
+import 'package:student_recorder_getx/controller/student_controller.dart';
+import 'package:student_recorder_getx/controller/theme_controller.dart';
+import 'package:student_recorder_getx/db/db_servies.dart';
 import 'package:student_recorder_getx/flash_screen.dart';
 import 'package:student_recorder_getx/screens/form_screen/form_screen.dart';
 import 'package:student_recorder_getx/screens/form_screen/update_screen.dart';
@@ -9,7 +14,10 @@ import 'package:student_recorder_getx/utils/curstom_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await initilaizeDataBase();
+  await DBService.database;
+  Get.put(ThemeController(), permanent: true);
+  Get.put(ScreenviewController(), permanent: true);
+  Get.lazyPut(() => StudentController(), fenix: true);
   runApp(const MyApp());
 }
 
