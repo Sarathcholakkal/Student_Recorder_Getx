@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
-import 'package:student_recorder_getx/screens/home_screen/home_screen.dart';
 
 class Flash_Screen extends StatefulWidget {
   const Flash_Screen({super.key});
@@ -32,12 +32,13 @@ class _Flash_ScreenState extends State<Flash_Screen> {
 
   callDelaty() async {
     await Future.delayed(const Duration(seconds: 3));
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) {
-          return const HomeScreen();
-        },
-      ),
-    );
+    Get.offNamed('/homeScreen');
   }
 }
+
+//get  navidation 
+// get statmanagment 
+//dependceis injection
+// keyvalue storege instead shared pref
+// chnage theme
+//validator

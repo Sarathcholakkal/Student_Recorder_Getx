@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/utils.dart';
+import 'package:student_recorder_getx/model/student.dart';
 import 'package:student_recorder_getx/screens/student_profile/student_profile.dart';
 
 class GridViewWidget extends StatelessWidget {
@@ -10,9 +13,7 @@ class GridViewWidget extends StatelessWidget {
         // final student = filterdList[index];
         return GestureDetector(
           onDoubleTap: () {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => StudentProfile()));
+            Get.toNamed('/studentProfile', arguments: {'student': Student});
           },
           child: Card(
             child: Column(
