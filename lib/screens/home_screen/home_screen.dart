@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
-import 'package:get/route_manager.dart';
+import 'package:student_recorder_getx/controller/screenview_controller.dart';
 import 'package:student_recorder_getx/controller/theme_controller.dart';
 import 'package:student_recorder_getx/screens/home_screen/widgets/gridview_widget.dart';
 import 'package:student_recorder_getx/screens/home_screen/widgets/listview_widget.dart';
@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ThemeController _themeController = Get.put(ThemeController());
+  final ScreenviewController _viewcontroller = Get.put(ScreenviewController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +40,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               centerTitle: true,
               actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.list,
-
-                    // ? Icons.list
-                    // : Icons.grid_on,
+                Obx(
+                  () => IconButton(
+                    onPressed: () {
+                      _viewcontroller.switchView();
+                    },
+                    icon: Icon(
+                      _viewcontroller.currentView.value == true
+                          ? Icons.list
+                          : Icons.grid_on,
+                    ),
                   ),
                 ),
 
@@ -56,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     onChanged: (value) {
                       _themeController.switchTheme();
                     },
-                    // activeColor: CustomTheme.white,
                   ),
                 ),
               ],
@@ -73,8 +76,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: SafeArea(child: ListViewWidget()),
+      body: SafeArea(
+        child: Obx(
+          () => _viewcontroller.currentView.value == true
+              ? GridViewWidget()
+              : ListViewWidget(),
+        ),
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    _themeController.dispose();
+    _viewcontroller.dispose();
+    super.dispose();
   }
 }
 
