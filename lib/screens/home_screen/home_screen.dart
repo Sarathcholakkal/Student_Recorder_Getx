@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
+import 'package:student_recorder_getx/controller/theme_controller.dart';
 import 'package:student_recorder_getx/screens/home_screen/widgets/gridview_widget.dart';
 import 'package:student_recorder_getx/screens/home_screen/widgets/listview_widget.dart';
 import 'package:student_recorder_getx/utils/const.dart';
@@ -11,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ThemeController _themeController = Get.put(ThemeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                // Switch(onChanged: toggleSwitch, value: themeChange.darkTheme),
+                Obx(
+                  () => Switch(
+                    value:
+                        _themeController.currentTheme.value == ThemeMode.dark,
+                    onChanged: (value) {
+                      _themeController.switchTheme();
+                    },
+                    // activeColor: CustomTheme.white,
+                  ),
+                ),
               ],
             ),
             Padding(
