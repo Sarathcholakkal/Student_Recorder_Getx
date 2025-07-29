@@ -128,34 +128,21 @@ class StudentProfile extends StatelessWidget {
                             ),
                           ),
                           onPressed: () async {
-                            showDialog(
-                              context: context,
-                              builder: (ctx1) {
-                                return AlertDialog(
-                                  title: const Text(
-                                    'Are you sure to delete this profile',
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(ctx1).pop();
-                                      },
-                                      child: const Text('close'),
-                                    ),
-                                    Spacer(),
-                                    TextButton(
-                                      onPressed: () async {
-                                        _studentController.deleteStudent(
-                                          student.id!,
-                                        );
-
-                                        Navigator.of(ctx1).pop();
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text('yes'),
-                                    ),
-                                  ],
+                            Get.defaultDialog(
+                              title: 'Are you sure to delete this profile?',
+                              middleText: '',
+                              textCancel: 'Close',
+                              textConfirm: 'Yes',
+                              confirmTextColor: Colors.white,
+                              onCancel: () {
+                                // just closes dialog
+                              },
+                              onConfirm: () async {
+                                await _studentController.deleteStudent(
+                                  student.id!,
                                 );
+                                Get.back();
+                                Get.back();
                               },
                             );
                           },

@@ -85,20 +85,12 @@ class _FormScreenState extends State<FormScreen> {
       clearField();
       // getAllStudent();
     } else {
-      showDialog(
-        context: ctx,
-        builder: (ctx1) {
-          return AlertDialog(
-            title: const Text('Please insert profile picture'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(ctx1).pop();
-                },
-                child: const Text('close'),
-              ),
-            ],
-          );
+      Get.defaultDialog(
+        title: 'Please insert profile picture',
+        middleText: '',
+        textConfirm: 'Close',
+        onConfirm: () {
+          Get.back(); // closes the dialog
         },
       );
     }
