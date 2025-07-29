@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:student_recorder_getx/controller/student_controller.dart';
-import 'package:student_recorder_getx/screens/student_profile/student_profile.dart';
 
 class ListViewWidget extends StatelessWidget {
   const ListViewWidget({super.key});
@@ -14,10 +11,16 @@ class ListViewWidget extends StatelessWidget {
     final _studentController = Get.find<StudentController>();
 
     return Obx(() {
+      final students = _studentController.currentList;
+
+      if (_studentController.isSearching == true &&
+          _studentController.noItemFound == true) {
+        return Center(child: Text('NO item found'));
+      }
       return ListView.builder(
-        itemCount: _studentController.students.length,
+        itemCount: students.length,
         itemBuilder: (context, index) {
-          final student = _studentController.students[index];
+          final student = students[index];
           return GestureDetector(
             onDoubleTap: () {
               Get.toNamed('/studentProfile', arguments: {'student': student});

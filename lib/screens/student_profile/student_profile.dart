@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:student_recorder_getx/controller/student_controller.dart';
 import 'package:student_recorder_getx/model/student.dart';
 import 'package:student_recorder_getx/screens/student_profile/info_widget.dart';
@@ -146,8 +145,6 @@ class StudentProfile extends StatelessWidget {
                                     Spacer(),
                                     TextButton(
                                       onPressed: () async {
-                                        final _studentController =
-                                            Get.find<StudentController>();
                                         _studentController.deleteStudent(
                                           student.id!,
                                         );

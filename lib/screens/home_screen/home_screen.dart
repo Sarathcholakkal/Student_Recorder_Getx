@@ -19,6 +19,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ThemeController _themeController = Get.find<ThemeController>();
   final ScreenviewController _viewcontroller = Get.find<ScreenviewController>();
+  final StudentController _studentController = Get.find<StudentController>();
+  final _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -73,10 +75,14 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                style: const TextStyle(fontSize: 16, color: Colors.black38),
-                controller: TextEditingController(),
+                style: const TextStyle(fontSize: 16),
+                controller: _searchController,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: searchInputDecoration,
+                onChanged: (value) {
+                  // impetmetnion of serach
+                  _studentController.searchStudents(value);
+                },
               ),
             ),
           ],

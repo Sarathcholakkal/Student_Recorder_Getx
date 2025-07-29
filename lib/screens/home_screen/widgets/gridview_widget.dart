@@ -9,7 +9,12 @@ class GridViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final students = _studentController.students;
+      final students = _studentController.currentList;
+
+      if (_studentController.isSearching == true &&
+          _studentController.noItemFound == true) {
+        return Center(child: Text('NO item found'));
+      }
 
       return GridView.builder(
         itemCount: students.length,
