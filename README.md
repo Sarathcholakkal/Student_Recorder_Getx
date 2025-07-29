@@ -14,3 +14,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+ need to integrate getx box 
+ need to integrate getx form validation
+ getx dependency injection
+ getx statemangment
+ getx alert box
+ getx theme controller
+ getx naviation done 
+
+ sql file crud 
+  
+  

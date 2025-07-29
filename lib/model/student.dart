@@ -17,7 +17,6 @@ class Student {
     this.id,
   });
 
-  // Factory constructor to create a Student from a map
   factory Student.fromMap(Map<String, Object?> map) {
     return Student(
       id: map['id'] as int?,
@@ -30,7 +29,6 @@ class Student {
     );
   }
 
-  // Optional: Convert Student back to map (useful for SQLite)
   Map<String, Object?> toMap() {
     return {
       'id': id,

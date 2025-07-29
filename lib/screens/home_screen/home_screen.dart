@@ -80,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 textAlignVertical: TextAlignVertical.center,
                 decoration: searchInputDecoration,
                 onChanged: (value) {
-                  // impetmetnion of serach
                   _studentController.searchStudents(value);
                 },
               ),
@@ -105,7 +104,3 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 }
-
-
-  // ? GridViewWidget()
-  //                 : ListViewWidget();
