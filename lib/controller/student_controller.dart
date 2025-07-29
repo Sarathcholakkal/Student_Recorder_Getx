@@ -6,6 +6,17 @@ class StudentController extends GetxController {
   RxList<Student> students = <Student>[].obs;
   // RxList<Student> filteredStudents = <Student>[].obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    loadInitialStudents();
+  }
+
+  void loadInitialStudents() {
+    // this functions used to load inital student
+    fetchStudents();
+  }
+
   Future<void> fetchStudents() async {
     final result = await DBService.getAllStudents();
     students.value = result;

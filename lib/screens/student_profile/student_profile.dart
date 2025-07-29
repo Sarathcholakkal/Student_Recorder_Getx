@@ -1,4 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:student_recorder_getx/controller/student_controller.dart';
+import 'package:student_recorder_getx/model/student.dart';
 import 'package:student_recorder_getx/screens/student_profile/info_widget.dart';
 
 class StudentProfile extends StatelessWidget {
@@ -6,6 +12,10 @@ class StudentProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> args = Get.arguments;
+    final student = args['student'] as Student;
+    final _studentController = Get.find<StudentController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,20 +40,20 @@ class StudentProfile extends StatelessWidget {
                       CircleAvatar(
                         backgroundColor: Colors.blue,
                         radius: 80,
-                        backgroundImage: // student.image != null
-                            //     ? FileImage(File(student.image)):
-                            const AssetImage("assets/profile.jpg")
-                                as ImageProvider,
+                        backgroundImage: student.image != null
+                            ? FileImage(File(student.image))
+                            : const AssetImage("assets/profile.jpg")
+                                  as ImageProvider,
                       ),
                       Text(
-                        'Olivia Bennett',
+                        student.name,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 30,
                         ),
                       ),
                       Text(
-                        'ID :${2023001}',
+                        'ID :${student.id!}',
                         style: TextStyle(
                           fontWeight: FontWeight.w200,
                           fontSize: 18,
@@ -65,19 +75,16 @@ class StudentProfile extends StatelessWidget {
                         ),
                       ),
 
-                      InforTileWidget(label: 'Full Name', value: 'prabisha'),
-                      InforTileWidget(
-                        label: 'Subject',
-                        value: 'Computer Science',
-                      ),
-                      InforTileWidget(label: 'CGPA', value: '7.6'),
+                      InforTileWidget(label: 'Full Name', value: student.name),
+                      InforTileWidget(label: 'Subject', value: student.subject),
+                      InforTileWidget(label: 'CGPA', value: student.cgpa),
                       InforTileWidget(
                         label: 'Email ID',
-                        value: 'sarathcholakkal@gmail.com',
+                        value: student.emailID,
                       ),
                       InforTileWidget(
                         label: 'Phone Number',
-                        value: '9846705406',
+                        value: student.phoneNumber,
                       ),
                       SizedBox(height: 15),
                       Align(
@@ -95,11 +102,10 @@ class StudentProfile extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (context) => UpdateScreen(),
-                            //   ),
-                            // );
+                            Get.toNamed(
+                              '/updateScreen',
+                              arguments: {'student': student},
+                            );
                           },
                           child: const Text(
                             "Edit",
@@ -122,7 +128,40 @@ class StudentProfile extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            showDialog(
+                              context: context,
+                              builder: (ctx1) {
+                                return AlertDialog(
+                                  title: const Text(
+                                    'Are you sure to delete this profile',
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx1).pop();
+                                      },
+                                      child: const Text('close'),
+                                    ),
+                                    Spacer(),
+                                    TextButton(
+                                      onPressed: () async {
+                                        final _studentController =
+                                            Get.find<StudentController>();
+                                        _studentController.deleteStudent(
+                                          student.id!,
+                                        );
+
+                                        Navigator.of(ctx1).pop();
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('yes'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           child: const Text(
                             "Delete",
                             style: TextStyle(fontSize: 20),
