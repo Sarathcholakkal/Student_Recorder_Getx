@@ -142,7 +142,8 @@ class StudentProfile extends StatelessWidget {
                                   student.id!,
                                 );
                                 Get.back();
-                                Get.back();
+                                // Get.back();
+                                Get.back(result: true);
                               },
                             );
                           },

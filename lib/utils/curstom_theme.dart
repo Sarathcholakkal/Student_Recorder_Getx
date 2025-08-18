@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTheme {
-  static const lightThemeFont = "Roboto"; // Android default
+  static const lightThemeFont = "Roboto"; 
   static const darkThemeFont = "sans-serif";
 
   // light theme

@@ -5,6 +5,7 @@ import 'package:student_recorder_getx/controller/student_controller.dart';
 
 class ListViewWidget extends StatelessWidget {
   const ListViewWidget({super.key});
+  // const ListViewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,16 @@ class ListViewWidget extends StatelessWidget {
           final student = students[index];
           return GestureDetector(
             onDoubleTap: () {
-              Get.toNamed('/studentProfile', arguments: {'student': student});
+              Get.toNamed(
+                '/studentProfile',
+                arguments: {'student': student},
+              )?.then((result) {
+                if (result == true) {
+                  _studentController.searchStudents(
+                    _studentController.lastSearch.value,
+                  );
+                }
+              });
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

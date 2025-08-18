@@ -7,6 +7,7 @@ class StudentController extends GetxController {
   RxList<Student> filteredStudents = <Student>[].obs;
   RxBool isSearching = false.obs;
   RxBool noItemFound = false.obs;
+  var lastSearch = ''.obs;
   List<Student> get currentList =>
       isSearching.value ? filteredStudents : students;
 
@@ -46,6 +47,7 @@ class StudentController extends GetxController {
   }
 
   void searchStudents(String query) {
+    lastSearch.value = query;
     if (query.isEmpty) {
       isSearching.value = false;
       noItemFound.value = false;

@@ -22,7 +22,16 @@ class GridViewWidget extends StatelessWidget {
           final student = students[index];
           return GestureDetector(
             onDoubleTap: () {
-              Get.toNamed('/studentProfile', arguments: {'student': student});
+              Get.toNamed(
+                '/studentProfile',
+                arguments: {'student': student},
+              )?.then((result) {
+                if (result == true) {
+                  _studentController.searchStudents(
+                    _studentController.lastSearch.value,
+                  );
+                }
+              });
             },
             child: Card(
               child: Column(
